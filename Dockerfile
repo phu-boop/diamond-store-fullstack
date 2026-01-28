@@ -17,6 +17,10 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Enable Apache modules
 RUN a2enmod rewrite
 
+# Configure Apache to listen on 0.0.0.0:80
+RUN echo "Listen 0.0.0.0:80" > /etc/apache2/ports.conf && \
+    echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
 # Set working directory
 WORKDIR /var/www/html
 

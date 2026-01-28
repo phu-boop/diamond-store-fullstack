@@ -4,8 +4,9 @@ $db_host = getenv('DB_HOST') ?: 'localhost';
 $db_user = getenv('DB_USER') ?: 'root';
 $db_pass = getenv('DB_PASS') ?: '';
 $db_name = getenv('DB_NAME') ?: 'web_mysqli';
+$db_port = getenv('DB_PORT') ?: 3306;
 
-$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name, $db_port);
 
 // Check connection
 if ($mysqli->connect_errno) {
