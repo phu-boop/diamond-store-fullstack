@@ -16,6 +16,8 @@ class Mailer {
             $mail->Password = 'tquwfzxtkzjuiklw';                           // SMTP password
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;                                    // TCP port to connect to
+            $mail->Timeout = 10;                                  // SMTP timeout 10 seconds
+            $mail->SMTPKeepAlive = false;                         // Don't keep connection alive
         
             //Recipients
             $mail->setFrom('phunla2784@gmail.com', 'Mailer');

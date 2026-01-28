@@ -150,56 +150,64 @@
         echo "paypal";
     }
     if (!isset($_SESSION['mail']) || empty($_SESSION['mail'])) {
-        die("Lỗi: Không tìm thấy email để gửi xác nhận đơn hàng.");
+        // Skip email if no address, but don't block the order
+        error_log("Warning: No email address for order confirmation");
+    } else {
+        $maildathang = $_SESSION['mail'];
+
+        // Nội dung email
+        $tieude = "LuxuryStore_Bạn đã đặt hàng thành công";
+        $noidung = "
+        <!DOCTYPE html>
+        <html lang='vi'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Mail đơn hàng</title>
+        </head>
+        <body>
+            <p>Xin chào <b>" . $_SESSION['dangky'] . "</b>,</p>
+            <p>Bạn đã đặt hàng thành công tại Luxury Store.</p>
+            <table border='1' cellspacing='0' cellpadding='10'>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá</th>
+                    <th>Tổng</th>
+                </tr>
+                $chi_tiet_don_hang
+                <tr>
+                    <td colspan='3'><b>Tổng cộng:</b></td>
+                    <td>".number_format($tong_tien, 0, ',', '.')." VNĐ</td>
+                </tr>
+                <tr>
+                    <td colspan='3'><b>Giảm giá:</b></td>
+                    <td style='color:red;'>- ".number_format($giam_gia, 0, ',', '.')." VNĐ</td>
+                </tr>
+                <tr>
+                    <td colspan='3'><b>Tổng sau giảm:</b></td>
+                    <td style='color:#d9534f;font-weight:bold;'>".number_format($tong_sau_giam, 0, ',', '.')." VNĐ</td>
+                </tr>
+            </table>
+            <p>Chúng tôi sẽ giao hàng sớm nhất!</p>
+        </body>
+        </html>";
+
+        // Try to send email but don't block if it fails
+        try {
+            $mail = new Mailer();
+            $mail->dathangmail($tieude, $noidung, $maildathang);
+        } catch (Exception $e) {
+            // Log error but continue - don't block user
+            error_log("Email send failed: " . $e->getMessage());
+        }
     }
-    $maildathang = $_SESSION['mail'];
-
-    // Nội dung email
-    $tieude = "LuxuryStore_Bạn đã đặt hàng thành công";
-    $noidung = "
-    <!DOCTYPE html>
-    <html lang='vi'>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>Mail đơn hàng</title>
-    </head>
-    <body>
-        <p>Xin chào <b>" . $_SESSION['dangky'] . "</b>,</p>
-        <p>Bạn đã đặt hàng thành công tại Luxury Store.</p>
-        <table border='1' cellspacing='0' cellpadding='10'>
-            <tr>
-                <th>Sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Giá</th>
-                <th>Tổng</th>
-            </tr>
-            $chi_tiet_don_hang
-            <tr>
-                <td colspan='3'><b>Tổng cộng:</b></td>
-                <td>".number_format($tong_tien, 0, ',', '.')." VNĐ</td>
-            </tr>
-            <tr>
-                <td colspan='3'><b>Giảm giá:</b></td>
-                <td style='color:red;'>- ".number_format($giam_gia, 0, ',', '.')." VNĐ</td>
-            </tr>
-            <tr>
-                <td colspan='3'><b>Tổng sau giảm:</b></td>
-                <td style='color:#d9534f;font-weight:bold;'>".number_format($tong_sau_giam, 0, ',', '.')." VNĐ</td>
-            </tr>
-        </table>
-        <p>Chúng tôi sẽ giao hàng sớm nhất!</p>
-    </body>
-    </html>";
-
-    $mail = new Mailer();
-    $mail->dathangmail($tieude, $noidung, $maildathang);
 
     // Xóa giỏ hàng sau khi đặt hàng thành công
     unset($_SESSION['cart']);
     
     echo "<script>
-        alert('Bạn đã đặt hàng thành công! Cảm ơn quý khách đã đặt hàng. Chúng tôi sẽ gửi mail xác nhận đơn hàng cho bạn!');
+        alert('Bạn đã đặt hàng thành công! Cảm ơn quý khách đã đặt hàng.');
         window.location.href = '../../../index.php?quanly=giohang&buoc=donhangdadat';
       </script>";
 ?>
