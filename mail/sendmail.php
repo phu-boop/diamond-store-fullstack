@@ -1,11 +1,6 @@
 <?php
-require 'PHPMailer/src/OAuthTokenProvider.php';
-require 'PHPMailer/src/OAuth.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/SMTP.php';
+require __DIR__ . '/../vendor/autoload.php';
 
- 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 class Mailer {

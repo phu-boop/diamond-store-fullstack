@@ -7,7 +7,11 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     zip \
     unzip \
+    git \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install PHP extensions
 RUN docker-php-ext-install mysqli pdo pdo_mysql
@@ -26,6 +30,10 @@ RUN echo "Listen 0.0.0.0:80" > /etc/apache2/ports.conf && \
 
 # Set working directory
 WORKDIR /var/www/html
+
+# Copy composer files first for better layer caching
+COPY composer.json ./
+RUN composer install --no-dev --optimize-autoloader
 
 # Copy application files
 COPY . /var/www/html/
