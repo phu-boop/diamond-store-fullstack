@@ -17,7 +17,10 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Enable Apache modules
 RUN a2enmod rewrite
 
-# Configure Apache to listen on 0.0.0.0:80
+# Copy custom Apache configuration
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# Configure Apache to bind to all interfaces
 RUN echo "Listen 0.0.0.0:80" > /etc/apache2/ports.conf && \
     echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
@@ -34,5 +37,5 @@ RUN chown -R www-data:www-data /var/www/html \
 # Expose port 80
 EXPOSE 80
 
-# Start Apache
+# Start Apache in foreground
 CMD ["apache2-foreground"]
