@@ -1,2 +1,8 @@
 vendor/
-composer.lock
+.env
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+node_modules/
+*.log

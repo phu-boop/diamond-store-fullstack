@@ -1,6 +1,7 @@
 # 💎 Diamond Store - Full-Stack E-Commerce Platform
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://your-app.onrender.com)
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://diamond-store-web.onrender.com)
+> **⚠️ Note:** The application is hosted on Render's free tier. The server may go to sleep after inactivity. Please **wait ~60 seconds** for the initial load if the site is slow.
 [![Tech Stack](https://img.shields.io/badge/stack-PHP%20%7C%20MySQL%20%7C%20Docker-blue)](#tech-stack)
 [![Deployment](https://img.shields.io/badge/deployment-Render%20%2B%20Railway-orange)](#deployment)
 
@@ -8,7 +9,7 @@
 
 ## 🎯 Project Overview
 
-Diamond Store is a comprehensive full-stack e-commerce application specializing in luxury jewelry. This project demonstrates end-to-end development capabilities from local development to production deployment using modern cloud infrastructure.
+Diamond Store is a comprehensive full-stack e-commerce application developed as a **University Course Project (3 months)**. It simulates a real-world luxury jewelry store, demonstrating end-to-end development capabilities from system design to production deployment using modern cloud infrastructure.
 
 **[📹 Live Demo Video](https://drive.google.com/file/d/1UId2zdR7i_wm7qoQku8QGzttTL9Wgixb/view?usp=drive_link)**
 
@@ -27,6 +28,18 @@ Diamond Store is a comprehensive full-stack e-commerce application specializing 
 - 📦 **Inventory Control** - CRUD operations for products and categories
 - 👥 **Customer Management** - View customer data and order history
 - 📈 **Analytics** - Sales reports and business insights
+
+### 🔐 Test Credentials (For HR/Reviewers)
+
+**Admin Dashboard:**
+- **URL:** [diamond-store-web.onrender.com/admincp/login.php](https://diamond-store-web.onrender.com/admincp/login.php)
+- **Username:** `admin`
+- **Password:** `123`
+
+**Customer Account:**
+- **Email:** `demo@gmail.com`
+- **Password:** `password123!`
+- *(Or you can register a new account freely)*
 
 ---
 
@@ -143,12 +156,14 @@ mysql://root:password@host:28967/railway
 1. **Containerization**
    - Custom Dockerfile with optimized layer caching
    - Multi-stage builds for dependency management
-   - Apache configuration for cloud hosting (0.0.0.0 binding)
+   - **Challenge:** Configuring Apache to serve properly behind Render's load balancer and handling variable port bindings.
+   - **Solution:** Reconfigured `000-default.conf` to bind to `0.0.0.0` and optimized the Dockerfile with multi-stage builds to reduce image size and build time.
 
 2. **Database Migration**
    - Migrated from localhost MySQL to cloud Railway
    - Dynamic port configuration (28967 instead of default 3306)
-   - Environment variable management for security
+   - **Challenge:** Handling secure database connections across different environments (Dev vs Prod).
+   - **Solution:** Implemented robust environment variable management for DB credentials and successfully migrated data from local MySQL to Railway's cloud instance.
 
 3. **Dependency Management**
    - Composer integration for PHPMailer library
@@ -188,7 +203,7 @@ diamond-store-fullstack/
 ### Backend Development
 ✅ PHP object-oriented programming  
 ✅ MySQL database design & optimization  
-✅ RESTful API integration (payment gateways)  
+✅ RESTful API integration (VNPay, MoMo IPN handling)  
 ✅ Email automation (PHPMailer/SMTP)  
 ✅ Session management & authentication  
 
@@ -257,7 +272,7 @@ diamond-store-fullstack/
 
 - 📧 Email: phunla2784@gmail.com
 - 🔗 GitHub: [@phu-boop](https://github.com/phu-boop)
-- 💼 LinkedIn: *[Your LinkedIn Profile]*
+- 💼 LinkedIn: [Nguyễn Lê Anh Phú](https://www.linkedin.com/in/nguyễn-lê-anh-phú-8392393a9)
 
 ---
 
