@@ -6,6 +6,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue)](https://www.docker.com)
 [![Render](https://img.shields.io/badge/Deploy-Render-purple)](https://render.com)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![CI - Docker Build](https://github.com/phu-boop/diamond-store-fullstack/actions/workflows/ci.yml/badge.svg)](https://github.com/phu-boop/diamond-store-fullstack/actions/workflows/ci.yml)
 
 > **⚠️ Note:** The application is hosted on Render's free tier. The server may go to sleep after inactivity. Please **wait ~60 seconds** for the initial load if the site is slow.
 >
@@ -167,7 +168,9 @@ mysql://root:password@host:28967/railway
 2. **Automatic Build** → Render detects commit and triggers Docker build
 3. **Container Deploy** → New container replaces old one (zero-downtime)
 
-**CI/CD:** Continuous Deployment is handled via Render's auto-deploy feature linked to the GitHub repository.
+**CI/CD Pipeline:**
+- **CI (GitHub Actions):** Automatically builds the Docker image on every push to ensure code integrity and build success.
+- **CD (Render):** Automatically deploys the successful build to the production environment.
 
 ---
 
