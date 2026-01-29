@@ -314,7 +314,7 @@ erDiagram
 
 **Nguyễn Lê Anh Phú**
 
-- 📧 Email: phunla2784@gmail.com
+- 📧 Email: phudz25022005@gmail.com
 - 🔗 GitHub: [@phu-boop](https://github.com/phu-boop)
 - 💼 LinkedIn: [Nguyễn Lê Anh Phú](https://www.linkedin.com/in/nguyễn-lê-anh-phú-8392393a9)
 
