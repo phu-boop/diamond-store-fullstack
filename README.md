@@ -1,9 +1,15 @@
 # 💎 Diamond Store - Full-Stack E-Commerce Platform
 
 [![Live Demo](https://img.shields.io/badge/demo-live-success)](https://diamond-store-web.onrender.com)
+[![PHP](https://img.shields.io/badge/PHP-8.0-blue)](https://www.php.net)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)](https://www.mysql.com)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue)](https://www.docker.com)
+[![Render](https://img.shields.io/badge/Deploy-Render-purple)](https://render.com)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
 > **⚠️ Note:** The application is hosted on Render's free tier. The server may go to sleep after inactivity. Please **wait ~60 seconds** for the initial load if the site is slow.
-[![Tech Stack](https://img.shields.io/badge/stack-PHP%20%7C%20MySQL%20%7C%20Docker-blue)](#tech-stack)
-[![Deployment](https://img.shields.io/badge/deployment-Render%20%2B%20Railway-orange)](#deployment)
+>
+> 🌐 **Live Demo:** [https://diamond-store-web.onrender.com](https://diamond-store-web.onrender.com)
 
 > A production-ready jewelry e-commerce platform with modern DevOps practices, payment integration, and cloud deployment.
 
@@ -11,7 +17,17 @@
 
 Diamond Store is a comprehensive full-stack e-commerce application developed as a **University Course Project (3 months)**. It simulates a real-world luxury jewelry store, demonstrating end-to-end development capabilities from system design to production deployment using modern cloud infrastructure.
 
-**[📹 Live Demo Video](https://drive.google.com/file/d/1UId2zdR7i_wm7qoQku8QGzttTL9Wgixb/view?usp=drive_link)**
+**[📹 Live Demo Video (YouTube)](https://drive.google.com/file/d/1UId2zdR7i_wm7qoQku8QGzttTL9Wgixb/view?usp=drive_link)**
+
+---
+
+## 🖼️ Screenshots
+
+### Homepage
+![Homepage](screenshots/home.png)
+
+### Admin Dashboard
+![Admin](screenshots/admin.png)
 
 ---
 
@@ -65,6 +81,14 @@ Diamond Store is a comprehensive full-stack e-commerce application developed as 
 ### Payment APIs
 - **VNPay** - Vietnamese payment gateway
 - **MoMo** - Mobile wallet integration
+
+---
+
+
+### 🔌 Integrations
+- **VNPay** - IPN callback handling for secure payments
+- **MoMo** - Mobile wallet payment verification
+- **PHPMailer** - SMTP service for order confirmations
 
 ---
 
@@ -142,10 +166,8 @@ mysql://root:password@host:28967/railway
 1. **Code Changes** → Push to GitHub
 2. **Automatic Build** → Render detects commit and triggers Docker build
 3. **Container Deploy** → New container replaces old one (zero-downtime)
-4. **Health Check** → Render verifies HTTP port 80 is accessible
 
-**Build Time:** ~2-3 minutes  
-**Deployment:** Fully automated via Git hooks
+**CI/CD:** Continuous Deployment is handled via Render's auto-deploy feature linked to the GitHub repository.
 
 ---
 
@@ -235,11 +257,24 @@ diamond-store-fullstack/
 
 **Total Records:** 200+ customers, 127+ orders, 130+ products
 
+### 🗄️ Entity Relationship Diagram
+
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ ORDER_DETAIL : contains
+    PRODUCT ||--o{ ORDER_DETAIL : includes
+    CATEGORY ||--o{ PRODUCT : categorizes
+    ADMIN ||--o{ PRODUCT : manages
+```
+*(Ascii representation of core relationships)*
+
 ---
 
 ## 🔐 Security Features
 
-- Password hashing (MD5 - *Note: Should upgrade to bcrypt for production*)
+- Password hashing (MD5)
+> **⚠️ Security Note:** MD5 hashing is used due to the specific constraints of this course project. In a real-world production environment, **bcrypt** or **Argon2** would be implemented for enhanced security.
 - SQL injection prevention via prepared statements
 - Environment variable-based secrets (no hardcoded credentials)
 - `.gitignore` for sensitive files
@@ -266,6 +301,15 @@ diamond-store-fullstack/
 
 ---
 
+## 📚 What I Learned
+
+- **Cloud Deployment:** Gained hands-on experience deploying containerized PHP applications on Render and managing remote SQL databases on Railway.
+- **Payment Integration:** Understood the complexities of integrating real-world payment gateways (VNPay, MoMo) including handling IPN callbacks and signature verification.
+- **DevOps:** Learned to optimize Dockerfiles with multi-stage builds and manage environment-sensitive configurations.
+- **Troubleshooting:** Developed strong debugging skills by resolving cross-environment issues (local vs cloud) such as Apache port binding and CORS.
+
+---
+
 ## 👨‍💻 Developer
 
 **Nguyễn Lê Anh Phú**
@@ -278,7 +322,7 @@ diamond-store-fullstack/
 
 ## 📝 License
 
-This project is created for educational and portfolio purposes.
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
